@@ -2,25 +2,27 @@ package com.br.blogDevs.controller;
 
 import com.br.blogDevs.entity.Usuario;
 import com.br.blogDevs.repository.UsuarioRepository;
-import com.br.blogDevs.service.paginaInicialService;
+import com.br.blogDevs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
     @Autowired
-    private paginaInicialService paginaInicialService;
+    private PostService postService;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario save(@RequestBody Usuario usuario){
+    public Usuario save(@RequestBody @Valid Usuario usuario){
         return usuarioRepository.save(usuario);
     }
 
